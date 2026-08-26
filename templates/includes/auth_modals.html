@@ -1,0 +1,105 @@
+{% load static %}
+
+<!-- VIP Sign In Modal -->
+<div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+  <div class="modal-box" style="max-width: 480px;">
+    <button class="modal-close-btn" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div style="margin-bottom: 24px; text-align: center;">
+      <span class="section-tag" style="margin-bottom: 8px;">
+        <span class="dot"></span>
+        <span>VIP Access</span>
+      </span>
+      <h3 id="loginModalTitle" style="font-size: 1.7rem; margin-top: 6px; color: #FFF;">Sign In to NovaJet</h3>
+      <p style="font-size: 0.88rem; color: var(--silver-muted); margin-top: 4px;">
+        Access your bespoke flight history, saved itineraries, and dispatch credentials.
+      </p>
+    </div>
+
+    <form id="ajaxLoginForm">
+      <div class="form-group">
+        <label class="form-label" for="loginUsername">Username or VIP Email</label>
+        <input type="text" class="form-control" id="loginUsername" placeholder="e.g. lord.vance or vance@capital.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Passcode</label>
+        <input type="password" class="form-control" id="loginPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px;">
+          <span>Sign In to VIP Portal</span>
+        </button>
+      </div>
+
+      <div style="margin-top: 18px; text-align: center; font-size: 0.85rem; color: var(--silver-muted);">
+        Don't have a private account? 
+        <a href="#" data-open-modal="registerModal" style="color: var(--electric-blue-light); font-weight: 600;">Apply for Membership</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- VIP Register Modal -->
+<div class="modal-overlay" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="regModalTitle">
+  <div class="modal-box" style="max-width: 520px;">
+    <button class="modal-close-btn" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div style="margin-bottom: 20px; text-align: center;">
+      <span class="section-tag" style="margin-bottom: 8px;">
+        <span class="dot"></span>
+        <span>Account Registration</span>
+      </span>
+      <h3 id="regModalTitle" style="font-size: 1.7rem; margin-top: 6px; color: #FFF;">Create Private Account</h3>
+      <p style="font-size: 0.88rem; color: var(--silver-muted); margin-top: 4px;">
+        Join the world's most discreet private aviation network.
+      </p>
+    </div>
+
+    <form id="ajaxRegisterForm">
+      <div class="form-group">
+        <label class="form-label" for="regFullName">Full Name</label>
+        <input type="text" class="form-control" id="regFullName" placeholder="e.g. Lord Alexander Vance" required>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label" for="regUsername">Username</label>
+          <input type="text" class="form-control" id="regUsername" placeholder="alexander_vance" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Direct Email</label>
+          <input type="email" class="form-control" id="regEmail" placeholder="vance@familyoffice.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="regPassword">Secure Password</label>
+        <input type="password" class="form-control" id="regPassword" placeholder="Minimum 8 characters" required>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px;">
+          <span>Register VIP Account</span>
+        </button>
+      </div>
+
+      <div style="margin-top: 16px; text-align: center; font-size: 0.85rem; color: var(--silver-muted);">
+        Already registered? 
+        <a href="#" data-open-modal="loginModal" style="color: var(--electric-blue-light); font-weight: 600;">Sign In</a>
+      </div>
+    </form>
+  </div>
+</div>

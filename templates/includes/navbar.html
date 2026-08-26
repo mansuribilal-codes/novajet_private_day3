@@ -1,0 +1,122 @@
+{% load static %}
+<header class="navbar-wrapper" id="mainNavbar">
+  <div class="container navbar-container">
+    <!-- Brand Logo -->
+    <a href="{% url 'charter:home' %}" class="brand-logo" aria-label="NovaJet Private Homepage">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">NOVA<span>JET</span></span>
+        <span class="brand-sub">Private</span>
+      </div>
+    </a>
+
+    <!-- Center Navigation Links -->
+    <nav aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li><a href="{% url 'charter:home' %}#experience" class="nav-link">The Experience</a></li>
+        <li><a href="{% url 'charter:home' %}#fleet" class="nav-link">Flagship Fleet</a></li>
+        <li><a href="{% url 'charter:home' %}#destinations" class="nav-link">Destinations</a></li>
+        <li><a href="{% url 'charter:home' %}#membership" class="nav-link">Membership</a></li>
+        <li><a href="{% url 'charter:home' %}#empty-legs" class="nav-link">Empty Legs</a></li>
+        <li><a href="{% url 'charter:home' %}#sanctuary" class="nav-link">Life On Board</a></li>
+      </ul>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="nav-actions">
+      <!-- Ambient Audio Synthesizer Toggle -->
+      <button type="button" class="ambient-toggle" id="ambientSoundToggle" title="Toggle Ambient Flight Atmosphere">
+        <div class="sound-bars">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span>Cabin Atmosphere</span>
+      </button>
+
+      <!-- Authentication Buttons / User Profile -->
+      {% if user.is_authenticated %}
+      <div class="user-profile-badge">
+        <span class="user-avatar-dot"></span>
+        <span>VIP {{ user.first_name|default:user.username }}</span>
+      </div>
+      <a href="{% url 'charter:logout' %}" class="btn btn-secondary btn-sm"
+        style="padding: 6px 14px; font-size: 0.78rem;">
+        <span>Sign Out</span>
+      </a>
+      {% else %}
+      <div class="auth-btn-group">
+        <button type="button" class="btn btn-secondary btn-sm" data-open-modal="loginModal"
+          style="padding: 7px 15px; font-size: 0.8rem;">
+          <span>Sign In</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-open-modal="registerModal"
+          style="padding: 7px 15px; font-size: 0.8rem; background: rgba(59, 130, 246, 0.12); border-color: rgba(59, 130, 246, 0.35);">
+          <span>Register</span>
+        </button>
+      </div>
+      {% endif %}
+
+      <!-- Primary CTA -->
+      <a href="{% url 'charter:home' %}#charter-request" class="btn btn-primary btn-sm btn-shimmer">
+        <span>Request Charter</span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-toggle" aria-label="Open Navigation Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Fullscreen Drawer -->
+<div class="drawer-overlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
+  <div class="drawer-header">
+    <div class="brand-text">
+      <span class="brand-name">NOVA<span>JET</span></span>
+      <span class="brand-sub">Private</span>
+    </div>
+    <button class="drawer-close" aria-label="Close Navigation Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <ul class="drawer-menu">
+    <li><a href="{% url 'charter:home' %}#experience">The Experience</a></li>
+    <li><a href="{% url 'charter:home' %}#fleet">Flagship Fleet</a></li>
+    <li><a href="{% url 'charter:home' %}#destinations">Destinations</a></li>
+    <li><a href="{% url 'charter:home' %}#membership">Membership</a></li>
+    <li><a href="{% url 'charter:home' %}#empty-legs">Empty Legs</a></li>
+    <li><a href="{% url 'charter:home' %}#sanctuary">Life On Board</a></li>
+    <li><a href="{% url 'charter:developer' %}" style="color: var(--electric-blue-light);">Developer (Mohammed
+        Bilal)</a></li>
+    {% if user.is_authenticated %}
+    <li style="font-size: 0.9rem; color: var(--silver-muted);">Logged in as VIP {{ user.username }}</li>
+    <li><a href="{% url 'charter:logout' %}" style="font-size: 1.1rem; color: #EF4444;">Sign Out</a></li>
+    {% else %}
+    <li><a href="#" data-open-modal="loginModal">VIP Sign In</a></li>
+    <li><a href="#" data-open-modal="registerModal">VIP Register</a></li>
+    {% endif %}
+  </ul>
+
+  <div class="drawer-footer">
+    <a href="{% url 'charter:home' %}#charter-request" class="btn btn-primary" style="width: 100%;">
+      <span>Request a Charter</span>
+    </a>
+  </div>
+</aside>

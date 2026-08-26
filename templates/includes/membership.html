@@ -1,0 +1,59 @@
+{% load static %}
+<section class="section-wrapper" id="membership">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center section-header-reveal">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Privileged Access</span>
+      </div>
+      <h2 class="section-title">
+        THE SOVEREIGN <span class="text-blue">MEMBERSHIPS</span>
+      </h2>
+      <p class="section-subtitle mx-auto" style="color: #E2E8F0; font-size: 1.05rem;">
+        Structured for ultra-high-net-worth individuals and corporate flight departments. Enjoy guaranteed fleet availability, transparent wholesale flight rates, and zero asset depreciation.
+      </p>
+    </div>
+
+    <!-- Membership Tiers Grid (High Contrast & Clear Readability) -->
+    <div class="grid-3 membership-tiers-grid" style="margin-top: 48px;">
+      {% for tier in tiers %}
+        <div class="tier-card {% if tier.is_featured %}featured-tier{% endif %}">
+          {% if tier.is_featured %}
+            <span class="tier-badge">Most Exclusive</span>
+          {% endif %}
+
+          <h3 class="tier-name">{{ tier.name }}</h3>
+          <p class="tier-subtitle">{{ tier.subtitle }}</p>
+
+          <div class="tier-price-box">
+            <div class="tier-deposit">{{ tier.annual_commitment }}</div>
+            <div class="tier-rate-note">{{ tier.hourly_rate_info }}</div>
+            <div class="tier-avail-note">
+              <span>Guaranteed Availability: </span><strong>{{ tier.availability_guarantee }}</strong>
+            </div>
+          </div>
+
+          <ul class="tier-perks-list">
+            {% for perk in tier.perks_list %}
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>{{ perk }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <button type="button" 
+                  class="btn {% if tier.is_featured %}btn-primary btn-shimmer{% else %}btn-secondary{% endif %}"
+                  data-open-modal="membershipModal" 
+                  data-tier-name="{{ tier.name }}"
+                  style="width: 100%; font-weight: 700;">
+            <span>Inquire {{ tier.name }}</span>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

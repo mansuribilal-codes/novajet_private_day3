@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}NovaJet Private | The Sky, Redefined — Ultra-Luxury Private Aviation{% endblock %}</title>
+  <meta name="description" content="NovaJet Private is an exclusive global private jet charter and membership company. Bespoke aviation, point-to-point discretion, and unmatched transcontinental comfort.">
+  <meta name="keywords" content="private jet charter, luxury aviation, business jet, Gulfstream G700, Bombardier Global 7500, private flight membership, empty leg deals">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Google Fonts: Syne (Display) + Plus Jakarta Sans (Headings) + Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Core & Component CSS -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+
+  <!-- CDNs: Three.js (3D Jet), Lenis Smooth Scroll, GSAP 3.12.5, ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <!-- Subtle Grain Texture Layer -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Sticky Luxury Navbar -->
+  {% include 'includes/navbar.html' %}
+
+  <!-- Main Content Block -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Luxury Footer -->
+  {% include 'includes/footer.html' %}
+
+  <!-- Modals & Overlays (Charter Success, Membership, Auth) -->
+  {% include 'includes/modals.html' %}
+  {% include 'includes/auth_modals.html' %}
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript Engines -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/three-jet-viewer.js' %}"></script>
+  <script src="{% static 'js/gsap-animations.js' %}"></script>
+  <script src="{% static 'js/booking-form.js' %}"></script>
+  <script src="{% static 'js/route-calculator.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

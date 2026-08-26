@@ -1,0 +1,111 @@
+{% load static %}
+<section class="section-wrapper" id="fleet">
+  <div class="container-wide">
+    <!-- Section Header -->
+    <div class="text-center section-header-reveal">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Aviation Masterpieces</span>
+      </div>
+      <h2 class="section-title">
+        THE FLAGSHIP <span class="text-gradient">FLEET</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Hand-selected, impeccably maintained aircraft operated exclusively by Wyvern Wingman & ARG/US Platinum certified flight crews.
+      </p>
+    </div>
+
+    <!-- 3D Interactive Three.js Jet Avionics Model Viewer -->
+    <div class="three-jet-container" id="threeJetViewerContainer">
+      <div class="three-overlay-hud">
+        <div class="three-hud-badge">
+          <span class="dot"></span>
+          <span>NOVAJET 3D AVIONICS RADAR // INTERACTIVE JET INSPECTION</span>
+        </div>
+      </div>
+      <div class="three-instructions">
+        &bull; Move cursor or drag to pitch / rotate aircraft
+      </div>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="fleet-filter-bar">
+      {% for cat in categories %}
+        <button type="button" class="filter-pill {% if cat.key == 'all' %}active{% endif %}" data-filter="{{ cat.key }}">
+          {{ cat.label }} ({{ cat.count }})
+        </button>
+      {% endfor %}
+    </div>
+
+    <!-- Fleet Cards Showcase Grid (Default Visible & 3D Interactive) -->
+    <div class="grid-3 fleet-showcase-grid" id="fleetGridContainer">
+      {% for jet in fleet %}
+        <div class="fleet-card" data-category="{{ jet.category }}" id="jet-card-{{ jet.id }}" style="display: flex !important; opacity: 1 !important;">
+          <!-- Image Container with Category Badge -->
+          <div class="fleet-img-wrap">
+            <img src="{{ jet.exterior_image }}" alt="{{ jet.name }}" loading="eager" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80';">
+            <span class="fleet-category-badge">{{ jet.get_category_display }}</span>
+          </div>
+
+          <!-- Body Info -->
+          <div class="fleet-body">
+            <h3 class="fleet-name">{{ jet.name }}</h3>
+            <p class="fleet-tagline">{{ jet.tagline }}</p>
+
+            <!-- Key Specifications Grid -->
+            <div class="fleet-specs-grid">
+              <div class="spec-cell">
+                <span class="spec-title">Range</span>
+                <span class="spec-value">{{ jet.range_nm }} NM</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-title">Max Speed</span>
+                <span class="spec-value">Mach {{ jet.speed_mach }}</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-title">Capacity</span>
+                <span class="spec-value">{{ jet.max_passengers }} Pax</span>
+              </div>
+            </div>
+
+            <!-- Cabin Dimensions & Luggage -->
+            <div style="font-size: 0.78rem; color: var(--silver-dark); margin-bottom: 14px; display: flex; justify-content: space-between;">
+              <span>Cabin: {{ jet.cabin_height }} H &bull; {{ jet.cabin_width }} W</span>
+              <span>Luggage: {{ jet.baggage_cu_ft }} cu ft</span>
+            </div>
+
+            <!-- Short Description -->
+            <p style="font-size: 0.85rem; color: var(--silver-muted); line-height: 1.5; margin-bottom: 16px;">
+              {{ jet.description|truncatewords:22 }}
+            </p>
+
+            <!-- Card Actions -->
+            <div class="fleet-actions">
+              <div class="fleet-rate">
+                <span>Est. Rate: </span><strong>${{ jet.hourly_rate_usd|floatformat:0 }}</strong>/hr
+              </div>
+              <a href="#charter-request" class="btn btn-secondary btn-sm" onclick="prefillAircraft('{{ jet.name }}')">
+                <span>Book Flagship</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  function prefillAircraft(name) {
+    const select = document.getElementById('preferredAircraft');
+    if (select) {
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].text.includes(name) || select.options[i].value.includes(name)) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+    window.showToast(`Selected Aircraft: ${name}`, 'info');
+  }
+</script>

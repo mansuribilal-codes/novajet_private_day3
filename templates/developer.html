@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mohammed Bilal Mansuri | Full Stack Web Developer (Python / Django) — NovaJet Private{% endblock %}
+
+{% block content %}
+<section class="section-wrapper" style="padding-top: calc(var(--nav-height) + 50px);">
+  <div class="container">
+    <!-- Breadcrumb & Back Link -->
+    <div style="margin-bottom: 24px;">
+      <a href="{% url 'charter:home' %}" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.85rem; color: var(--electric-blue-light); text-transform: uppercase; letter-spacing: 0.1em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Return to NovaJet Global Command</span>
+      </a>
+    </div>
+
+    <!-- Developer Hero Card -->
+    <div class="developer-hero-card">
+      <div class="dev-profile-wrap">
+        <!-- Profile Photo -->
+        <img src="{{ dev.profile_image }}" alt="{{ dev.name }}" class="dev-avatar-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';">
+
+        <!-- Profile Details -->
+        <div style="flex-grow: 1;">
+          <div class="section-tag" style="margin-bottom: 8px;">
+            <span class="dot"></span>
+            <span>Platform Architect & Full Stack Engineer</span>
+          </div>
+
+          <h1 class="dev-name">{{ dev.name }}</h1>
+          <div class="dev-title">{{ dev.title }}</div>
+
+          <p style="font-size: 1.05rem; color: var(--platinum-cool); line-height: 1.7; max-width: 800px;">
+            {{ dev.bio }}
+          </p>
+
+          <!-- Contact Grid -->
+          <div class="dev-contact-grid">
+            <div class="dev-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <span style="font-size: 0.72rem; color: var(--silver-dark); display: block; text-transform: uppercase;">Direct Line / WhatsApp</span>
+                <a href="tel:{{ dev.phone }}">{{ dev.phone }}</a>
+              </div>
+            </div>
+
+            <div class="dev-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <div>
+                <span style="font-size: 0.72rem; color: var(--silver-dark); display: block; text-transform: uppercase;">Direct Email</span>
+                <a href="mailto:{{ dev.email }}">{{ dev.email }}</a>
+              </div>
+            </div>
+
+            <div class="dev-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              <div>
+                <span style="font-size: 0.72rem; color: var(--silver-dark); display: block; text-transform: uppercase;">LinkedIn Profile</span>
+                <a href="{{ dev.linkedin }}" target="_blank" rel="noopener noreferrer">{{ dev.linkedin_display }}</a>
+              </div>
+            </div>
+
+            <div class="dev-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <div>
+                <span style="font-size: 0.72rem; color: var(--silver-dark); display: block; text-transform: uppercase;">GitHub Repository</span>
+                <a href="{{ dev.github }}" target="_blank" rel="noopener noreferrer">{{ dev.github_display }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Architecture & Core Competencies -->
+    <div class="grid-2">
+      <!-- Card 1: Core Technologies -->
+      <div class="glass-panel" style="padding: 36px;">
+        <span class="section-tag">
+          <span class="dot"></span>
+          <span>Core Engineering Stack</span>
+        </span>
+        <h2 style="font-size: 1.6rem; margin-bottom: 16px; color: #FFF;">Technical Competencies</h2>
+        <p style="margin-bottom: 20px; font-size: 0.95rem;">
+          Specialized in scalable Python and Django architectures, high-performance database schema design, and engineering intuitive user interfaces with state-of-the-art animations.
+        </p>
+
+        <div class="skills-tags-grid">
+          {% for skill in dev.skills %}
+            <span class="skill-tag">{{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Card 2: NovaJet Architecture Highlights -->
+      <div class="glass-panel" style="padding: 36px;">
+        <span class="section-tag">
+          <span class="dot"></span>
+          <span>NovaJet Implementation</span>
+        </span>
+        <h2 style="font-size: 1.6rem; margin-bottom: 16px; color: #FFF;">Aviation Engine Features</h2>
+        
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 16px; font-size: 0.92rem; color: var(--platinum-cool);">
+          <li style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Django 5.1 MVC architecture with SQLite & PostgreSQL compatibility</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Interactive Three.js 3D WebGL Jet Avionics Model</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Great Circle Distance & Flight Corridor Estimator API</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Lenis smooth scrolling synchronized with GSAP ScrollTrigger</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric-blue-light)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Web Audio API ambient 88Hz luxury flight hum synthesizer</span>
+          </li>
+        </ul>
+
+        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="mailto:{{ dev.email }}" class="btn btn-primary btn-sm">
+            <span>Hire / Contact Developer</span>
+          </a>
+          <a href="{{ dev.github }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+            <span>View GitHub Profile</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

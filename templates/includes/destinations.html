@@ -1,0 +1,121 @@
+{% load static %}
+<section class="section-wrapper" id="destinations">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center section-header-reveal">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Global Network</span>
+      </div>
+      <h2 class="section-title">
+        COVETED <span class="text-blue">DESTINATIONS</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Fly directly into exclusive private airfields inaccessible to commercial airlines. Over 5,000 global VIP corridors available 24/7.
+      </p>
+    </div>
+
+    <!-- Horizontal Destinations Scroll Track -->
+    <div class="destinations-scroll-track">
+      {% for dest in destinations %}
+        <div class="dest-card">
+          <div class="dest-img-wrap">
+            <img src="{{ dest.image_url }}" alt="{{ dest.name }}" loading="lazy">
+            <span class="dest-code-pill">{{ dest.airport_code }}</span>
+          </div>
+          <div class="dest-body">
+            <h3 class="dest-title">{{ dest.name }}</h3>
+            <div class="dest-fbo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>{{ dest.fbo_terminal }}</span>
+            </div>
+            <p class="dest-desc">{{ dest.description }}</p>
+            <div class="dest-footer">
+              <span>From London: <strong>{{ dest.flight_time_london }}</strong></span>
+              <span>From NY: <strong>{{ dest.flight_time_ny }}</strong></span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Interactive Flight Time & Route Calculator Box -->
+    <div class="flight-calculator-box">
+      <div style="text-align: center; margin-bottom: 10px;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--electric-blue-light); letter-spacing: 0.15em; text-transform: uppercase;">
+          Interactive Flight Calculator
+        </span>
+        <h3 style="font-size: 1.8rem; margin-top: 6px; color: #FFF;">Calculate Your Flight Vector</h3>
+      </div>
+
+      <form class="calc-grid" id="flightCalculatorForm">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="calcOrigin">Departure Hub</label>
+          <select class="form-control" id="calcOrigin">
+            <option value="LONDON" selected>London Farnborough (FAB)</option>
+            <option value="NEW YORK">New York Teterboro (TEB)</option>
+            <option value="DUBAI">Dubai Al Maktoum (DWC)</option>
+            <option value="GENEVA">Geneva Cointrin (GVA)</option>
+            <option value="NICE">Nice Côte d’Azur (NCE)</option>
+            <option value="MALE">Malé Velana (MLE)</option>
+            <option value="TOKYO">Tokyo Haneda (HND)</option>
+            <option value="ASPEN">Aspen Pitkin (ASE)</option>
+            <option value="PALM BEACH">Palm Beach (PBI)</option>
+            <option value="PARIS">Paris Le Bourget (LBG)</option>
+            <option value="SINGAPORE">Singapore Seletar (XSP)</option>
+            <option value="ST MORITZ">Samedan St. Moritz (SMV)</option>
+            <option value="LOS ANGELES">Van Nuys Los Angeles (VNY)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="calcDestination">Arrival Hub</label>
+          <select class="form-control" id="calcDestination">
+            <option value="DUBAI" selected>Dubai Al Maktoum (DWC)</option>
+            <option value="LONDON">London Farnborough (FAB)</option>
+            <option value="NEW YORK">New York Teterboro (TEB)</option>
+            <option value="GENEVA">Geneva Cointrin (GVA)</option>
+            <option value="NICE">Nice Côte d’Azur (NCE)</option>
+            <option value="MALE">Malé Velana (MLE)</option>
+            <option value="TOKYO">Tokyo Haneda (HND)</option>
+            <option value="ASPEN">Aspen Pitkin (ASE)</option>
+            <option value="PALM BEACH">Palm Beach (PBI)</option>
+            <option value="PARIS">Paris Le Bourget (LBG)</option>
+            <option value="SINGAPORE">Singapore Seletar (XSP)</option>
+            <option value="ST MORITZ">Samedan St. Moritz (SMV)</option>
+            <option value="LOS ANGELES">Van Nuys Los Angeles (VNY)</option>
+          </select>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-primary" id="calcSubmitBtn" style="height: 52px; width: 100%;">
+            <span>Estimate Vector</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Live Calculation Display Result -->
+      <div class="calc-output-display">
+        <div class="spec-cell">
+          <span class="spec-title">Great Circle Distance</span>
+          <span class="spec-value" id="calcResultDistance">2,960 NM (5,482 KM)</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-title">Estimated Flight Time</span>
+          <span class="spec-value" id="calcResultTime">6h 25m</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-title">Recommended Flagship</span>
+          <span class="spec-value" id="calcResultJet">Dassault Falcon 8X / Bombardier 3500</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-title">Cruise Corridor</span>
+          <span class="spec-value" id="calcResultAltitude">FL430 - FL450 (Direct)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

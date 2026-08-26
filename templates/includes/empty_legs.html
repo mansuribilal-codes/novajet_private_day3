@@ -1,0 +1,50 @@
+{% load static %}
+<section class="section-wrapper" id="empty-legs">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center section-header-reveal">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Exclusive Opportunities</span>
+      </div>
+      <h2 class="section-title">
+        EMPTY LEG <span class="text-blue">MARKETPLACE</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Repositioning flights offered at exceptional preferential rates. Fly on the world's most prestigious aircraft with up to 60% savings.
+      </p>
+    </div>
+
+    <!-- Empty Legs Grid -->
+    <div class="grid-2" style="margin-top: 50px;">
+      {% for deal in empty_legs %}
+        <div class="empty-leg-card">
+          <span class="discount-tag">-{{ deal.savings_percent }}% OFF</span>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--electric-blue-light); font-family: var(--font-mono); margin-bottom: 4px;">
+              DEPARTURE: {{ deal.departure_date }}
+            </div>
+            <h3 class="leg-route">{{ deal.origin_city }} &rarr; {{ deal.destination_city }}</h3>
+            <div class="leg-aircraft">
+              {{ deal.aircraft_name }} &bull; {{ deal.aircraft_category }} &bull; Up to {{ deal.passenger_capacity }} Guests
+            </div>
+          </div>
+
+          <div class="leg-prices">
+            <span class="leg-price-current">${{ deal.empty_leg_price_usd|floatformat:0 }}</span>
+            <span class="leg-price-regular">${{ deal.regular_price_usd|floatformat:0 }}</span>
+            <span style="font-size: 0.8rem; color: var(--silver-dark);">(All-Inclusive Charter)</span>
+          </div>
+
+          <button type="button" 
+                  class="btn btn-primary btn-sm book-empty-leg-btn" 
+                  data-origin="{{ deal.origin_city }}" 
+                  data-destination="{{ deal.destination_city }}" 
+                  data-aircraft="{{ deal.aircraft_name }}">
+            <span>Reserve This Empty Leg</span>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

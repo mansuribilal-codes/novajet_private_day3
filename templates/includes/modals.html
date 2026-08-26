@@ -1,0 +1,131 @@
+{% load static %}
+
+<!-- 1. Charter Booking Success Modal -->
+<div class="modal-overlay" id="charterSuccessModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+  <div class="modal-box" style="max-width: 600px; text-align: center;">
+    <button class="modal-close-btn" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div style="width: 70px; height: 70px; margin: 0 auto 20px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #34D399;">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--electric-blue-light); letter-spacing: 0.2em; text-transform: uppercase;">
+      Flight Dossier Transmitted
+    </span>
+    <h3 id="successModalTitle" style="font-size: 2rem; margin: 8px 0 16px; color: #FFF;">Flight Dispatch Confirmed</h3>
+
+    <div style="background: rgba(15, 31, 56, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+        <span style="color: var(--silver-dark); font-size: 0.85rem;">Reference Code:</span>
+        <strong style="color: #FFF; font-family: var(--font-mono); font-size: 1.1rem;" id="confirmedRefCode">NVJ-89402</strong>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: var(--silver-dark); font-size: 0.85rem;">Charter Route:</span>
+        <strong style="color: #FFF; font-size: 0.95rem;" id="confirmedRoute">London ➔ Dubai</strong>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: var(--silver-dark); font-size: 0.85rem;">Principal Passenger:</span>
+        <strong style="color: #FFF; font-size: 0.95rem;" id="confirmedName">Lord Alexander Vance</strong>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <span style="color: var(--silver-dark); font-size: 0.85rem;">Mission Date:</span>
+        <strong style="color: #FFF; font-size: 0.95rem;" id="confirmedDate">2026-09-15</strong>
+      </div>
+    </div>
+
+    <p style="font-size: 0.92rem; color: var(--silver-muted); margin-bottom: 28px; line-height: 1.6;">
+      A dedicated Senior Flight Director has been assigned to your mission. You will receive tailored tail-number options and crew briefing via encrypted phone/WhatsApp within 15 minutes.
+    </p>
+
+    <button type="button" class="btn btn-primary" data-close-modal style="width: 100%;">
+      <span>Return to Terminal</span>
+    </button>
+  </div>
+</div>
+
+<!-- 2. Membership Inquiry Modal -->
+<div class="modal-overlay" id="membershipModal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle">
+  <div class="modal-box" style="max-width: 680px;">
+    <button class="modal-close-btn" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div style="margin-bottom: 24px;">
+      <span style="font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; color: var(--electric-blue-light); letter-spacing: 0.2em; text-transform: uppercase;">
+        Sovereign Admissions
+      </span>
+      <h3 id="memberModalTitle" style="font-size: 1.85rem; margin-top: 6px; color: #FFF;">Apply For NovaJet Membership</h3>
+      <p style="font-size: 0.9rem; color: var(--silver-muted); margin-top: 6px;">
+        Membership is strictly vetted to maintain fleet availability and privacy integrity.
+      </p>
+    </div>
+
+    <form id="membershipInquiryForm">
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label" for="memberFullName">Full Name *</label>
+          <input type="text" class="form-control" id="memberFullName" required placeholder="Alexander Vance">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="memberCompany">Company / Family Office</label>
+          <input type="text" class="form-control" id="memberCompany" placeholder="Vance Capital Holdings">
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label" for="memberEmail">Email Address *</label>
+          <input type="email" class="form-control" id="memberEmail" required placeholder="vance@capital.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="memberPhone">Phone / WhatsApp *</label>
+          <input type="tel" class="form-control" id="memberPhone" required placeholder="+44 20 7946 0912">
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label" for="modalMembershipTier">Membership Tier</label>
+          <select class="form-control" id="modalMembershipTier">
+            <option value="Access Tier">Access Tier ($150k Deposit)</option>
+            <option value="Prestige Tier" selected>Prestige Tier ($300k Deposit)</option>
+            <option value="Sovereign Tier">Sovereign Tier ($600k Deposit)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="memberHours">Est. Annual Flight Hours</label>
+          <select class="form-control" id="memberHours">
+            <option value="25 - 50 Hours">25 - 50 Hours</option>
+            <option value="50 - 100 Hours" selected>50 - 100 Hours</option>
+            <option value="100 - 200 Hours">100 - 200 Hours</option>
+            <option value="200+ Hours">200+ Hours (Fleet Account)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="memberNotes">Additional Requirements / Routing Preferences</label>
+        <textarea class="form-control" id="memberNotes" rows="3" placeholder="Primary routes, preferred cabin layout, catering requirements..."></textarea>
+      </div>
+
+      <div style="margin-top: 24px; text-align: center;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 52px;">
+          <span>Submit Membership Dossier</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
