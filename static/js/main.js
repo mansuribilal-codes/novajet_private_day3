@@ -35,17 +35,20 @@ function initMobileDrawer() {
   const closeBtn = document.querySelector('.drawer-close');
   const drawer = document.querySelector('.mobile-drawer');
   const overlay = document.querySelector('.drawer-overlay');
-  const drawerLinks = document.querySelectorAll('.drawer-menu a');
+  const drawerLinks = document.querySelectorAll('.drawer-menu a, .drawer-footer a, .drawer-brand');
+  const drawerModalBtns = document.querySelectorAll('.mobile-drawer [data-open-modal]');
 
   function openDrawer() {
-    drawer.classList.add('open');
-    overlay.classList.add('active');
+    if (drawer) drawer.classList.add('open');
+    if (overlay) overlay.classList.add('active');
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
 
   function closeDrawer() {
-    drawer.classList.remove('open');
-    overlay.classList.remove('active');
+    if (drawer) drawer.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
@@ -56,6 +59,18 @@ function initMobileDrawer() {
   drawerLinks.forEach(link => {
     link.addEventListener('click', closeDrawer);
   });
+
+  drawerModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
 }
 
 // 3. Ambient Luxury Cabin Hum (Web Audio API Synthesizer)
@@ -64,53 +79,65 @@ let humGain = null;
 let isSoundActive = false;
 
 function initAmbientSound() {
-  const toggleBtn = document.getElementById('ambientSoundToggle');
-  if (!toggleBtn) return;
+  const toggleBtns = document.querySelectorAll('.ambient-toggle');
+  if (!toggleBtns.length) return;
 
-  toggleBtn.addEventListener('click', () => {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
+  function updateVisualState(isActive) {
+    toggleBtns.forEach(btn => {
+      if (isActive) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
 
-      const osc1 = audioCtx.createOscillator();
-      const osc2 = audioCtx.createOscillator();
-      const filter = audioCtx.createBiquadFilter();
-      humGain = audioCtx.createGain();
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
 
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(88, audioCtx.currentTime);
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(132, audioCtx.currentTime);
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const filter = audioCtx.createBiquadFilter();
+        humGain = audioCtx.createGain();
 
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(220, audioCtx.currentTime);
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(88, audioCtx.currentTime);
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(132, audioCtx.currentTime);
 
-      humGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(220, audioCtx.currentTime);
 
-      osc1.connect(filter);
-      osc2.connect(filter);
-      filter.connect(humGain);
-      humGain.connect(audioCtx.destination);
+        humGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
 
-      osc1.start();
-      osc2.start();
-    }
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(humGain);
+        humGain.connect(audioCtx.destination);
 
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+        osc1.start();
+        osc2.start();
+      }
 
-    isSoundActive = !isSoundActive;
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
 
-    if (isSoundActive) {
-      humGain.gain.setTargetAtTime(0.045, audioCtx.currentTime, 0.5);
-      toggleBtn.classList.add('active');
-      showToast('Ambient Cabin Atmosphere: Active', 'success');
-    } else {
-      humGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.3);
-      toggleBtn.classList.remove('active');
-      showToast('Ambient Cabin Atmosphere: Muted', 'info');
-    }
+      isSoundActive = !isSoundActive;
+
+      if (isSoundActive) {
+        humGain.gain.setTargetAtTime(0.045, audioCtx.currentTime, 0.5);
+        updateVisualState(true);
+        showToast('Ambient Cabin Atmosphere: Active', 'success');
+      } else {
+        humGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.3);
+        updateVisualState(false);
+        showToast('Ambient Cabin Atmosphere: Muted', 'info');
+      }
+    });
   });
 }
 
